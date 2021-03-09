@@ -50,7 +50,7 @@ namespace mailcore {
 @interface MCOAbstractPart : NSObject <NSCopying>
 
 #ifdef __cplusplus
-- (instancetype) initWithMCPart:(mailcore::AbstractPart *)part NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nonnull) initWithMCPart:(mailcore::AbstractPart *)part NS_DESIGNATED_INITIALIZER;
 #endif
 
 /** Returns type of the part (single / message part / multipart/mixed,
@@ -61,24 +61,24 @@ namespace mailcore {
 @property (nonatomic, copy) NSString * _Nullable filename;
 
 /** Returns MIME type of the part. For example application/data.*/
-@property (nonatomic, copy) NSString * mimeType;
+@property (nonatomic, copy) NSString * _Nullable mimeType;
 
 /** Returns charset of the part in case it's a text single part.*/
-@property (nonatomic, copy) NSString * charset;
+@property (nonatomic, copy) NSString * _Nullable charset;
 
 /** Returns the unique ID generated for this part.
  It's a unique identifier that's created when the object is created manually
  or created by the parser.*/
-@property (nonatomic, copy) NSString * uniqueID;
+@property (nonatomic, copy) NSString * _Nullable uniqueID;
 
 /** Returns the value of the Content-ID field of the part.*/
-@property (nonatomic, copy) NSString * contentID;
+@property (nonatomic, copy) NSString * _Nullable contentID;
 
 /** Returns the value of the Content-Location field of the part.*/
-@property (nonatomic, copy) NSString * contentLocation;
+@property (nonatomic, copy) NSString * _Nullable contentLocation;
 
 /** Returns the value of the Content-Description field of the part.*/
-@property (nonatomic, copy) NSString * contentDescription;
+@property (nonatomic, copy) NSString * _Nullable contentDescription;
 
 /** Returns whether the part is an explicit inline attachment.*/
 @property (nonatomic, assign, getter=isInlineAttachment) BOOL inlineAttachment;
@@ -87,31 +87,31 @@ namespace mailcore {
 @property (nonatomic, assign, getter=isAttachment) BOOL attachment;
 
 /** Returns the part with the given Content-ID among this part and its subparts.*/
-- (MCOAbstractPart *) partForContentID:(NSString *)contentID;
+- (MCOAbstractPart * _Nullable) partForContentID:(NSString * _Nonnull)contentID;
 
 /** Returns the part with the given unique identifier among this part and its subparts.*/
-- (MCOAbstractPart *) partForUniqueID:(NSString *)uniqueID;
+- (MCOAbstractPart * _Nullable) partForUniqueID:(NSString * _Nonnull)uniqueID;
 
 /** Returns a string representation of the data according to charset.*/
-- (NSString *) decodedStringForData:(NSData *)data;
+- (NSString * _Nullable) decodedStringForData:(NSData * _Nonnull)data;
 
 /** Adds a content type parameter.*/
-- (void) setContentTypeParameterValue:(NSString *)value forName:(NSString *)name;
+- (void) setContentTypeParameterValue:(NSString * _Nonnull)value forName:(NSString * _Nonnull)name;
 
 /** Remove a given content type parameter.*/
-- (void) removeContentTypeParameterForName:(NSString *)name;
+- (void) removeContentTypeParameterForName:(NSString * _Nonnull)name;
 
 /** Returns the value of a given content type parameter.*/
-- (NSString *) contentTypeParameterValueForName:(NSString *)name;
+- (NSString * _Nullable) contentTypeParameterValueForName:(NSString * _Nonnull)name;
 
 /** Returns an array with the names of all content type parameters.*/
-- (NSArray * /* NSString */) allContentTypeParametersNames;
+- (NSArray * _Nullable /* NSString */) allContentTypeParametersNames;
 
 #pragma mark - Unavailable initializers
 /** Do not invoke this directly. */
-- (instancetype) init NS_UNAVAILABLE;
+- (instancetype _Nonnull) init NS_UNAVAILABLE;
 /** Do not invoke this directly. */
-+ (instancetype) new NS_UNAVAILABLE;
++ (instancetype _Nonnull) new NS_UNAVAILABLE;
 
 @end
 
