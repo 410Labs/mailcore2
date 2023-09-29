@@ -20,8 +20,8 @@ typedef unsigned long ulong;
 #endif
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-#include <tidy/tidy.h>
-#include <tidy/buffio.h>
+#include <tidy.h>
+#include <buffio.h>
 #else
 #include <tidy.h>
 #include <buffio.h>
