@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "MailCore2",
     platforms: [
-        .iOS(.v9), .macOS(.v10_10)
+        .iOS(.v12), .macOS(.v11)
     ],
     products: [
         .library(
@@ -15,7 +15,7 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(name: "MailCore2",
-                      url: "https://github.com/mattmaddux/mailcore2/raw/master/bin/MailCore2-2020-09-24.xcframework.zip",
-                      checksum: "c3479968c758094165fb0b4de5ca7dd9f8aafac423388c51406c447f69a1b853")
+                      url: "https://github.com/410labs/mailcore2/raw/master/bin/MailCore2-2023-10-18.xcframework.zip",
+                      checksum: "ab0451cf0761c5286d2c2c0cc4417e1303eb2c7b0fb5d3f842c52dec336921c9")
     ]
 )
