@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # Create XCFramework
 cd "$(dirname "$0")"
