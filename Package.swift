@@ -16,6 +16,6 @@ let package = Package(
     targets: [
         .binaryTarget(name: "MailCore2",
                       url: "https://github.com/410labs/mailcore2/raw/master/bin/MailCore2-2023-10-25.xcframework.zip",
-                      checksum: "3a14dd03af7ab77777f688d56e5b3a47dc2f05c40631a6bbe1d09896fc155799")
+                      checksum: "ba2e738c01471e727a172feb154651762bf9daa3414d0f968bc419ece19053ce")
     ]
 )
