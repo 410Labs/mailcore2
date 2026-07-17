@@ -15,6 +15,14 @@ let exclude = [
     "scripts",
 ]
 
+// EXPERIMENT (CI#150): mailcore2 bundles its own MiniZip whose symbols collide with the
+// app's ZipArchive dependency (49 duplicate symbols at link). The two minizip forks have
+// diverged, so dedup/exclude fails. Prefix mailcore2's minizip symbols (definitions in the
+// .c files AND callers in MCZip.cpp) so its copy stays self-contained and private.
+let zipSyms: [String] = ["fill_fopen_filefunc", "fill_fopen64_filefunc", "unzClose", "unzCloseCurrentFile", "unzeof", "unzGetCurrentFileInfo", "unzGetCurrentFileInfo64", "unzGetFilePos", "unzGetFilePos64", "unzGetGlobalComment", "unzGetGlobalInfo", "unzGetGlobalInfo64", "unzGetLocalExtrafield", "unzGetOffset", "unzGetOffset64", "unzGoToFilePos", "unzGoToFilePos64", "unzGoToFirstFile", "unzGoToNextFile", "unzLocateFile", "unzOpen", "unzOpen2", "unzOpen2_64", "unzOpen64", "unzOpenCurrentFile", "unzOpenCurrentFile2", "unzOpenCurrentFile3", "unzOpenCurrentFilePassword", "unzReadCurrentFile", "unzSetOffset", "unzSetOffset64", "unztell", "unztell64", "zipClose", "zipCloseFileInZip", "zipCloseFileInZipRaw", "zipCloseFileInZipRaw64", "zipOpen", "zipOpen2", "zipOpen2_64", "zipOpen64", "zipOpenNewFileInZip", "zipOpenNewFileInZip2", "zipOpenNewFileInZip2_64", "zipOpenNewFileInZip3", "zipOpenNewFileInZip3_64", "zipOpenNewFileInZip4", "zipOpenNewFileInZip4_64", "zipWriteInFileInZip"]
+let zipRenameC: [CSetting] = zipSyms.map { .define($0, to: "mc2_" + $0) }
+let zipRenameCxx: [CXXSetting] = zipSyms.map { .define($0, to: "mc2_" + $0) }
+
 let baseCSettings: [CSetting] =  [
     .headerSearchPath("include"),
     .headerSearchPath("src"),
@@ -39,7 +47,7 @@ let baseCSettings: [CSetting] =  [
     .headerSearchPath("src/core/zip"),
     .headerSearchPath("src/core/zip/MiniZip"),
     .define("HAVE_CFNETWORK", to: "1")
-]
+] + zipRenameC
 
 let objCSettings: [CSetting] = [
     .headerSearchPath("src/objc/abstract"),
@@ -333,7 +341,7 @@ let package = Package(
                 sources: cSources + objCSources,
                 publicHeadersPath: "include",
                 cSettings: baseCSettings + objCSettings,
-                cxxSettings: [.unsafeFlags(["-fno-objc-arc"])],
+                cxxSettings: [.unsafeFlags(["-fno-objc-arc"])] + zipRenameCxx,
                 linkerSettings: [
                     .linkedLibrary("c++"),
                     .linkedLibrary("z"),
