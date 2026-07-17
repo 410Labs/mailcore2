@@ -325,7 +325,9 @@ let package = Package(
             targets: ["MailCore"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/jsflax/libetpan/", branch: "master"),
+        // EXPERIMENT (CI#150): local libetpan carrying the SASL-on-iOS fix (functionaldude fork,
+        // jsflax/libetpan#1) so password-IMAP (MCOAuthType.saslPlain) works on device.
+        .package(path: "../libetpan"),
         .package(url: "https://github.com/jsflax/tidy-html5/", branch: "master"),
         .package(url: "https://github.com/jsflax/ctemplate/", branch: "master")
     ],

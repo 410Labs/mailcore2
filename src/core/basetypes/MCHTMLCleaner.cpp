@@ -51,7 +51,7 @@ String * HTMLCleaner::cleanHTML(String * input)
     // This option is not available on the Mac.
     tidyOptSetBool(tdoc, TidyDropEmptyElems, no);
 #endif
-    tidyOptSetBool(tdoc, TidyXhtmlOut, yes);
+    tidyOptSetBool(tdoc, TidyHtmlOut, yes);
     tidyOptSetInt(tdoc, TidyDoctypeMode, TidyDoctypeUser);
     
     tidyOptSetBool(tdoc, TidyMark, no);
