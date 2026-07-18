@@ -325,11 +325,11 @@ let package = Package(
             targets: ["MailCore"]),
     ],
     dependencies: [
-        // EXPERIMENT (CI#150): local libetpan carrying the SASL-on-iOS fix (functionaldude fork,
-        // jsflax/libetpan#1) so password-IMAP (MCOAuthType.saslPlain) works on device.
-        .package(path: "../libetpan"),
-        .package(url: "https://github.com/jsflax/tidy-html5/", branch: "master"),
-        .package(url: "https://github.com/jsflax/ctemplate/", branch: "master")
+        // 410Labs source-SPM stack, pinned by commit (CI#150 / Chuck 1.32.0).
+        // libetpan = dinhvh HEAD (Jul 2026: TCP-keepalive + hardening) + SASL-on-iOS.
+        .package(url: "https://github.com/410Labs/libetpan", revision: "9c97699ba79094aa29fa6573a6c778ac544762f4"),
+        .package(url: "https://github.com/410Labs/tidy-html5", revision: "d7a0c39c314683be796ccd2133ed79001c0a048c"),
+        .package(url: "https://github.com/410Labs/ctemplate", revision: "0a57d6df8e4c13b4730689493d7b83556ace4925")
     ],
     targets: [
         .target(name: "MailCore",
