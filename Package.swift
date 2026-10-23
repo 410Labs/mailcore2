@@ -326,8 +326,8 @@ let package = Package(
     ],
     dependencies: [
         // 410Labs source-SPM stack, pinned by commit (CI#150 / Chuck 1.32.0).
-        // libetpan = dinhvh HEAD (Jul 2026: TCP-keepalive + hardening) + SASL-on-iOS.
-        .package(url: "https://github.com/410Labs/libetpan", revision: "a419ab38cd933f216b7effcda9abf4424ce78241"),
+        // libetpan = dinhvh Jul 2026 + SASL-on-iOS + Oct 2026 stream/parser fixes cherry-picked (CK#68).
+        .package(url: "https://github.com/410Labs/libetpan", revision: "ca344a650be27da96519b46b7cd4b5be74d1e6f3"),
         .package(url: "https://github.com/410Labs/tidy-html5", revision: "d7a0c39c314683be796ccd2133ed79001c0a048c"),
         .package(url: "https://github.com/410Labs/ctemplate", revision: "0a57d6df8e4c13b4730689493d7b83556ace4925")
     ],
